@@ -38,7 +38,7 @@ dxy_df["US_Dollar_Index"] = dxy_df["US_Dollar_Index"].astype(float)
 # See your data
 #dxy_df
 dxy_sdf = spark.createDataFrame(dxy_df)
-dxy_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.dxy_table")
+dxy_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.dxy_table")
 
 # COMMAND ----------
 
@@ -73,7 +73,7 @@ final_eurusd_df = pd.concat([alpha_eurusd_df,eurusd_df])
 #final_eurusd_df
 
 final_eurusd_sdf = spark.createDataFrame(final_eurusd_df)
-final_eurusd_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.final_eurusd_table")
+final_eurusd_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.final_eurusd_table")
 
 # COMMAND ----------
 
@@ -90,7 +90,7 @@ us_interest_df['US_Interest_Rate'] = us_interest_df['US_Interest_Rate'].astype(f
 #us_interest_df.head(10)
 
 us_interest_sdf = spark.createDataFrame(us_interest_df)
-us_interest_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.us_interest_table")
+us_interest_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.us_interest_table")
 
 # COMMAND ----------
 
@@ -107,7 +107,7 @@ us_inflation_df['US_Inflation_Rate'] = us_inflation_df['US_Inflation_Rate'].asty
 #us_inflation_df.head(10)
 
 us_inflation_sdf = spark.createDataFrame(us_inflation_df)
-us_inflation_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.us_inflation_table")
+us_inflation_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.us_inflation_table")
 
 # COMMAND ----------
 
@@ -124,7 +124,7 @@ us_rgdp_df['US_Real_GDP(B)'] = us_rgdp_df['US_Real_GDP(B)'].astype(float)
 #us_rgdp_df.head(10)
 
 us_rgdp_sdf = spark.createDataFrame(us_rgdp_df)
-us_rgdp_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.us_rgdp_table")
+us_rgdp_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.us_rgdp_table")
 
 # COMMAND ----------
 
@@ -141,7 +141,7 @@ us_unemployment_df['US_Unemployment_Rate'] = us_unemployment_df['US_Unemployment
 #us_unemployment_df.head(10)
 
 us_unemployment_sdf = spark.createDataFrame(us_unemployment_df)
-us_unemployment_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.us_unemployment_table")
+us_unemployment_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.us_unemployment_table")
 
 # COMMAND ----------
 
@@ -158,7 +158,7 @@ us_gov_debt_df['US_Government_Debt(M)'] = us_gov_debt_df['US_Government_Debt(M)'
 #us_gov_debt_df.head(10)
 
 us_gov_debt_sdf = spark.createDataFrame(us_gov_debt_df)
-us_gov_debt_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.us_gov_debt_table")
+us_gov_debt_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.us_gov_debt_table")
 
 # COMMAND ----------
 
@@ -176,12 +176,12 @@ eu_interest_df['EU_Interest_Rate'] = eu_interest_df['EU_Interest_Rate'].astype(f
 #eu_interest_df
 
 eu_interest_sdf = spark.createDataFrame(eu_interest_df)
-eu_interest_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.eu_interest_table")
+eu_interest_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.eu_interest_table")
 
 # COMMAND ----------
 
 #EU Inflation Rate
-eu_inflation_id = "FPCPITOTLZGUSA"
+eu_inflation_id = "FPCPITOTLZGEMU"
 
 eu_inflation_url = f"https://api.stlouisfed.org/fred/series/observations?series_id={eu_inflation_id}&api_key={fred_api_key}&file_type=json"
 eu_inflation_r = requests.get(eu_inflation_url)
@@ -193,7 +193,7 @@ eu_inflation_df['EU_Inflation_Rate'] = eu_inflation_df['EU_Inflation_Rate'].asty
 #eu_inflation_df.head(10)
 
 eu_inflation_sdf = spark.createDataFrame(eu_inflation_df)
-eu_inflation_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.eu_inflation_table")
+eu_inflation_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.eu_inflation_table")
 
 # COMMAND ----------
 
@@ -210,7 +210,7 @@ eu_rgdp_df['EU_Real_GDP(M)'] = eu_rgdp_df['EU_Real_GDP(M)'].astype(float)
 #eu_rgdp_df.head(10)
 
 eu_rgdp_sdf = spark.createDataFrame(eu_rgdp_df)
-eu_rgdp_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.eu_rgdp_table")
+eu_rgdp_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.eu_rgdp_table")
 
 # COMMAND ----------
 
@@ -227,7 +227,7 @@ eu_unemployment_df['EU_Unemployment_Rate'] = eu_unemployment_df['EU_Unemployment
 #eu_unemployment_df.head(10)
 
 eu_unemployment_sdf = spark.createDataFrame(eu_unemployment_df)
-eu_unemployment_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.eu_unemployment_table")
+eu_unemployment_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.eu_unemployment_table")
 
 # COMMAND ----------
 
@@ -265,7 +265,7 @@ final_eu_deb_per_df = pd.concat([eustat_deb_per_df,eu_deb_per_df])
 #final_eu_deb_per_df
 
 final_eu_deb_per_sdf = spark.createDataFrame(final_eu_deb_per_df)
-final_eu_deb_per_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.final_eu_deb_per_table")
+final_eu_deb_per_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.final_eu_deb_per_table")
 
 # COMMAND ----------
 
@@ -282,7 +282,7 @@ eu_gdp_df['EU_GDP(M)'] = eu_gdp_df['EU_GDP(M)'].astype(float)
 #eu_gdp_df.head(10)
 
 eu_gdp_sdf = spark.createDataFrame(eu_gdp_df)
-eu_gdp_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.eu_gdp_table")
+eu_gdp_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.eu_gdp_table1")
 
 # COMMAND ----------
 
@@ -300,7 +300,7 @@ gold_df['Commodities_Index_Gold'] = gold_df['Commodities_Index_Gold'].astype(flo
 # See your data
 #gold_df
 gold_sdf = spark.createDataFrame(gold_df)
-gold_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.gold_table")
+gold_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.gold_table1")
 
 # COMMAND ----------
 
@@ -319,7 +319,7 @@ oil_df['Commodities_Crude_Oil'] = oil_df['Commodities_Crude_Oil'].astype(float)
 #oil_df
 
 oil_sdf = spark.createDataFrame(oil_df)
-oil_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.oil_table")
+oil_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.oil_table")
 
 # COMMAND ----------
 
@@ -336,7 +336,7 @@ policy_uncer_idx_df['Global_Economic_Policy_Uncertainty_Index'] = policy_uncer_i
 #print(policy_uncer_idx_df)
 
 policy_uncer_idx_sdf = spark.createDataFrame(policy_uncer_idx_df)
-policy_uncer_idx_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.policy_uncer_idx_table")
+policy_uncer_idx_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.policy_uncer_idx_table")
 
 # COMMAND ----------
 
@@ -354,7 +354,7 @@ volat_idx_df['Volatility_Index'] = volat_idx_df['Volatility_Index'].astype(float
 #print(volat_idx_df)
 
 volat_idx_sdf = spark.createDataFrame(volat_idx_df)
-volat_idx_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.volat_idx_table")
+volat_idx_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.volat_idx_table")
 
 # COMMAND ----------
 
@@ -372,7 +372,7 @@ consum_confid_df['Consumer_Sentiment'] = consum_confid_df['Consumer_Sentiment'].
 #print(consum_confid_df)
 
 consum_confid_sdf = spark.createDataFrame(consum_confid_df)
-consum_confid_sdf.write.format("Parquet").mode("overwrite").saveAsTable("Louis.consum_confid_table")
+consum_confid_sdf.write.format("Parquet").mode("append").saveAsTable("Louis.consum_confid_table")
 
 # COMMAND ----------
 
